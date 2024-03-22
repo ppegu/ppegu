@@ -1,5 +1,6 @@
 {
-  "name": "ppegu",
+  "name": "ppegu-templates",
+  "version": "0.0.1",
   "module": "src/index.ts",
   "type": "module",
   "scripts": {
@@ -17,6 +18,5 @@
     "inquirer": "^9.2.16",
     "prettier": "^3.2.5",
     "release-it": "^17.1.1"
-  },
-  "version": "0.0.1"
+  }
 }
