@@ -1,4 +1,4 @@
-name: bun-server
+name: client
 
 stages:
   - build
@@ -9,14 +9,13 @@ build:
   image: oven/bun:1.0.3
   artifacts:
     paths:
-      - server/build
+      - client/build
   script:
     - bun -v
-    - cd ./server && bun install
+    - cd ./client && bun install
     - bun run build
     - cp ./pm2.json build/pm2.json
     - cp ./package.json build/package.json
-    - cp ./.env.deploy build/.env
     - cd build && bun install
     - bun run doc:prod
     - ls build
@@ -34,13 +33,13 @@ deploy:
     - apt-get install sshpass -y
     - mkdir -p ~/.ssh && touch ~/.ssh/known_hosts
     - ssh-keyscan $DEPLOY_HOST >> ~/.ssh/known_hosts
-    - ls server/
+    - ls client/
     # checking deploy dir
-    - sshpass -p $SSH_PASSWORD ssh $SSH_USERNAME@$DEPLOY_HOST "mkdir -p $DEPLOY_DIR/server/"
+    - sshpass -p $SSH_PASSWORD ssh $SSH_USERNAME@$DEPLOY_HOST "mkdir -p $DEPLOY_DIR/client/"
     #  echo "uploading artifacts..."
-    - sshpass -p $SSH_PASSWORD scp -rv server/build $SSH_USERNAME@$DEPLOY_HOST:$DEPLOY_DIR/server/
+    - sshpass -p $SSH_PASSWORD scp -rv client/build $SSH_USERNAME@$DEPLOY_HOST:$DEPLOY_DIR/client/
     - sshpass -p $SSH_PASSWORD ssh $SSH_USERNAME@$DEPLOY_HOST "pm2 stop pm2-health"
-    # starting production server
-    - sshpass -p $SSH_PASSWORD ssh $SSH_USERNAME@$DEPLOY_HOST "cd $DEPLOY_DIR/server/build && pm2 delete pm2.json && pm2 restart pm2.json"
+    # starting production client
+    - sshpass -p $SSH_PASSWORD ssh $SSH_USERNAME@$DEPLOY_HOST "cd $DEPLOY_DIR/client/build && pm2 delete pm2.json && pm2 restart pm2.json"
     - sshpass -p $SSH_PASSWORD ssh $SSH_USERNAME@$DEPLOY_HOST "pm2 restart pm2-health"
     - echo "deploy success!!"

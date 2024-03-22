@@ -1,7 +1,0 @@
-stages:
-  - triggers
-
-trigger_a:
-  stage: triggers
-  trigger:
-    include: scripts/cicd/.gitlab-ci.yml

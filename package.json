@@ -5,10 +5,7 @@
   "scripts": {
     "release": "release-it"
   },
-  "bin": {
-    "cicd": "./scripts/cicd/index.ts",
-    "template": "./scripts/template/index.ts"
-  },
+  "bin": "./scripts/index.ts",
   "devDependencies": {
     "@types/bun": "latest",
     "@types/inquirer": "^9.0.7"
@@ -18,6 +15,7 @@
   },
   "dependencies": {
     "inquirer": "^9.2.16",
+    "prettier": "^3.2.5",
     "release-it": "^17.1.1"
   }
 }
