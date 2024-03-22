@@ -1,0 +1,23 @@
+{
+  "name": "ppegu",
+  "module": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "release": "release-it"
+  },
+  "bin": {
+    "cicd": "./scripts/cicd/index.ts",
+    "template": "./scripts/template/index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/inquirer": "^9.0.7"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "inquirer": "^9.2.16",
+    "release-it": "^17.1.1"
+  }
+}
