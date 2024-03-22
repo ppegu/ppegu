@@ -55,6 +55,17 @@ export default class ExpressProject {
       packageJsonPretty
     );
 
+    if (info.cicd === "true") {
+      const configDir = path.join(
+        __dirname,
+        `../../templates/${info.repositoryProvider}/.bun-${info.framwork}.yml`
+      );
+
+      if (info.repositoryProvider === "gitlab") {
+        fs.copyFileSync(configDir, path.join(projectPath, ".gitlab-ci.yml"));
+      }
+    }
+
     console.log("\nDone!😎 Happy coding😍😍😍. \n");
     console.log(`cd ${projectPath} and run "bun install" to get start.\n`);
   }
